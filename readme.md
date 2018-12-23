@@ -1,7 +1,13 @@
-<<<<<<< HEAD
-docker exec -it a26adcbc0c4e bash
-=======
-Веб-сервис для демонстрации заказчику модели сентимент-анализа отзывов на кино 
+Веб-сервис для демонстрации заказчику модели сентимент-анализа отзывов на кино.
+
+Чтобы запустить сервис на своем localhost'e необходимо:
+1. Установить докер
+2. В директории со скачанным проектом выполнить комманду $ docker-compose up --build
+
+Теперь по адресу https://localhost:5000 доступна приветственная страница, а по адресу https://localhost:5000/sentiment-demo - страница с демонстрацией модели.
+
+Возможно, сервис сейчас крутится на http://ec2-3-17-128-84.us-east-2.compute.amazonaws.com:5000/sentiment-demo
+
 
 
 
@@ -18,25 +24,15 @@ docker exec -it a26adcbc0c4e bash
 
 
 docker exec -it flask-hello_flask_1 bash
->>>>>>> 84b7e354aedd9c3b36b5184ae4c9949cae10f902
 
 docker exec -it a26adcbc0c4e python model.py
 
+docker kill $(docker ps -q)
 
-
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"flower":"1,2,3,7"}' \
-  http://localhost:5000/iris_post
-
-  docker kill $(docker ps -q)
-<<<<<<< HEAD
-
-  echo "# sentiment-flask-docker" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/Rezyapkin-Vyacheslav/sentiment-flask-docker.git
 git push -u origin master
-=======
->>>>>>> 84b7e354aedd9c3b36b5184ae4c9949cae10f902
+
+ssh -i "seti.pem" ec2-user@ec2-3-17-128-84.us-east-2.compute.amazonaws.com

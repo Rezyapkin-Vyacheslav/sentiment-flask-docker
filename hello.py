@@ -27,19 +27,23 @@ app.config.update(dict(
     SECRET_KEY="powerful secretkey",
     WTF_CSRF_SECRET_KEY="a csrf secret key"
 ))
-MAX_LEN = 10
+MAX_LEN = 1000
 @app.route("/sentiment-demo", methods=["POST", "GET"])
 def index_page(text="", prediction_message=""):
     if request.method == "POST":
         text = request.form["text"]
         if len(text)< MAX_LEN:
-            with open("ydf_demo_logs.txt", "a", "utf-8") as logfile:
-                print(text)
-                print ("<response>")
-                prediction_message = "with proba={:.2} I suppose it is a good film".format(clf.predict_proba([text])[0][1])
-                print(prediction_message)
-                print ("</response>")
+            # don't ask what is it 
+            if ("sex" in text.lower()) and ("hard" in text.lower()):
+                prediction_message = "do you want to be arrested? be carefull"
+            else:
+                with open("ydf_demo_logs.txt", "a", "utf-8") as logfile:
+                    print(text)
+                    print ("<response>")
+                    prediction_message = "with proba={:.2} I suppose it is a good film".format(clf.predict_proba([text])[0][1])
+                    print(prediction_message)
+                    print ("</response>")
         else:
-            prediction_message = 'Len of text must be less than 100000'
+            prediction_message = 'Len of text must be less than ' + str(MAX_LEN) 
 	
     return render_template('hello.html', text=text, prediction_message=prediction_message)
