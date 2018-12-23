@@ -11,4 +11,3 @@ services:
       - "5000:5000"
     volumes:
       - ./:/root
-    image: username/repository:tag
