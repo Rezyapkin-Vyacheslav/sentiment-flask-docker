@@ -33,16 +33,12 @@ def index_page(text="", prediction_message=""):
     if request.method == "POST":
         text = request.form["text"]
         if len(text)< MAX_LEN:
-            # don't ask what is it 
-            if ("sex" in text.lower()) and ("hard" in text.lower()):
-                prediction_message = "do you want to be arrested? be carefull"
-            else:
-                with open("ydf_demo_logs.txt", "a", "utf-8") as logfile:
-                    print(text)
-                    print ("<response>")
-                    prediction_message = "with proba={:.2} I suppose it is a good film".format(clf.predict_proba([text])[0][1])
-                    print(prediction_message)
-                    print ("</response>")
+           with open("ydf_demo_logs.txt", "a", "utf-8") as logfile:
+                print(text)
+                print ("<response>")
+                prediction_message = "with proba={:.2} I suppose it is a good film".format(clf.predict_proba([text])[0][1])
+                print(prediction_message)
+                print ("</response>")
         else:
             prediction_message = 'Len of text must be less than ' + str(MAX_LEN) 
 	
